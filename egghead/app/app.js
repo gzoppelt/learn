@@ -74,7 +74,6 @@ eggly.controller('MainController', function MainController($scope) {
         };
     };
     main.createBookmark = function (bookmark) {
-        console.log(bookmark);
         main.bookmarks.push(bookmark);
         main.resetCreateForm();
     };
