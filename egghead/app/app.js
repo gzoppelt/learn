@@ -1,6 +1,20 @@
-var eggly = angular.module('egglyApp', []);
+angular.module('egglyApp', [
+    'ui.router',
+    'eggly.categories',
+    'eggly.bookmarks'
+])
 
-eggly.controller('MainController', function MainController($scope) {
+.config(function ($stateProvider) {
+    $stateProvider
+        .state('eggly', {
+            url: '/',
+            templateUrl: 'app/categories/categories.tmpl.html',
+            controller: 'MainController'
+        })
+    ;
+})
+
+.controller('MainController', function MainController($scope) {
 
     var main = this;
 
@@ -104,4 +118,6 @@ eggly.controller('MainController', function MainController($scope) {
         });
     };
 
-});
+})
+
+;
