@@ -1,1 +1,5 @@
-angular.module('eggly.models.bookmarks', []);
+angular.module('eggly.models.bookmarks', [
+
+])
+
+;

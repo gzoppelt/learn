@@ -14,7 +14,7 @@ angular.module('egglyApp', [
     ;
 })
 
-.controller('MainController', function MainController($scope) {
+.controller('MainController', function MainController() {
 
     var main = this;
 
