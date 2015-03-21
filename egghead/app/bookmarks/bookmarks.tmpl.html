@@ -1,0 +1,65 @@
+<h1>{{ bmc.currentCategoryName }}</h1>
+<div ng-class="{'active':bmc.isSelectedBookmark(bookmark.id)}"
+     ng-repeat="bookmark in bmc.bookmarks | filter:{category:bmc.currentCategoryName}">
+    <button class="close"
+            ng-click="bmc.deleteBookmark(bookmark)">&times;</button>
+    <button class="btn btn-link"
+            ng-click="bmc.setEditedBookmark(bookmark); bmc.startEditing();">
+        <span class="glyphicon glyphicon-pencil"></span>
+    </button>
+    <a href="{{ bookmark.url }}" target="_blank">{{ bookmark.title }}</a>
+</div>
+<div>
+    <button class="close">&times;</button>
+</div>
+<div ng-if="!bmc.isCreating && !bmc.isEditing && bmc.currentCategoryName">
+    <hr>
+    <button class="btn btn-link"
+            ng-click="bmc.startCreating()">
+        <span class="glyphicon glyphicon-plus"></span>
+        Create a bookmark
+    </button>
+</div>
+<!-- CREATING -->
+<div ng-if="bmc.shouldShowCreating()">
+    <hr>
+    <form class="create-form"
+
+          role="form"
+          ng-submit="bmc.createBookmark(bmc.newBookmark)"
+          novalidate>
+        <div class="form-group">
+            <label>Bookmark Title</label>
+            <input type="text" class="form-control" ng-model="bmc.newBookmark.title">
+        </div>
+        <div class="form-group">
+            <label>Bookmark URL</label>
+            <input type="text" class="form-control" ng-model="bmc.newBookmark.url">
+        </div>
+        <button type="submit" class="btn btn-info btn-lg">Create</button>
+        <button class="btn btn-default btn-lg pull-right"
+                ng-click="bmc.cancelCreating()">
+            Cancel
+        </button>
+    </form>
+</div>
+<!-- EDITING -->
+<div ng-if="bmc.shouldShowEditing()">
+    <hr>
+    <h4>Editing {{ bmc.editedBookmark.title }}</h4>
+    <form class="edit-form"
+          role="form"
+          ng-submit="bmc.updateBookmark(bmc.editedBookmark)"
+          novalidate>
+        <div class="form-group">
+            <label>Bookmark Title</label>
+            <input type="text" class="form-control" ng-model="bmc.editedBookmark.title">
+        </div>
+        <div class="form-group">
+            <label>Bookmark URL</label>
+            <input type="text" class="form-control" ng-model="bmc.editedBookmark.url">
+        </div>
+        <button class="btn btn-info btn-lg">Save</button>
+        <button class="btn btn-default btn-lg pull-right" ng-click="bmc.cancelEditing()">Cancel</button>
+    </form>
+</div>
